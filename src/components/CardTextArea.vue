@@ -52,5 +52,7 @@ export default {
 }
 .card__text::placeholder {
   color: rgba(0, 0, 0, 0.3);
+
+  
 }
 </style>

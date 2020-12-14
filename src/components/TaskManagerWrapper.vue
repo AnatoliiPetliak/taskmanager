@@ -1,8 +1,8 @@
 <template>
   <div class="main">
- <ControlTitle />
- <FiterContainer />
- <BoardContainer />
+    <ControlTitle />
+    <FiterContainer />
+    <BoardContainer />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import FiterContainer from "./FilterContainer"
 import BoardContainer from "./BoardContainer"
 
 export default {
-  name: 'HelloWorld',
+  name: 'TaskManagerWrapper',
   components:{
     ControlTitle,
     FiterContainer,

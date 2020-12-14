@@ -1,8 +1,7 @@
 <template>
     <section class="main__control control container">
         <h1 class="control__title">TASKMANAGER</h1>
-    </section>
-    
+    </section>  
 </template>
 
 <script >
@@ -35,6 +34,15 @@ export default {
     display: flex;
     align-items: baseline;
 }
+
+.control__title {
+  font-size: 16px;
+  line-height: 23px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
 
 
 
