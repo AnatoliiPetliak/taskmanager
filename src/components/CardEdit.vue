@@ -1,76 +1,77 @@
 <template>
-    <article class="card card--edit card--yellow card--repeat">
-        <form class="card__form" method="get">
-            <div class="card__inner">
-                <div class="card__color-bar">
-                    <svg class="card__color-bar-wave" width="100%" height="10">
-                        <use xlink:href="#wave" />
-                    </svg>
-                </div>
-
-                <CardTextArea />
-                <CardSettings />
-                <CardBtn />
+<div class="card__cntainer">
+<article class="card card--edit card--yellow card--repeat">
+    <form class="card__form" method="get" @submit.prevent="onSubmit">
+        <div class="card__inner">
+            <div class="card__color-bar">
+                <svg class="card__color-bar-wave" width="100%" height="10">
+                    <use xlink:href="#wave" />
+                </svg>
             </div>
-        </form>
-    </article>
+
+            <div class="card__textarea-wrap">
+                <label>
+                    <textarea v-model="message" class="card__text" placeholder="Start typing your text here..." name="text">
+                        This is example of task edit. You can set date and chose repeating days and color.
+                    </textarea>
+                </label>
+            </div>
+
+            <div class="card__settings">
+                <CardDetails />
+                <CardColors />
+            </div>
+
+            <div class="card__status-btns">
+                <button class="card__save" type="submit">save</button>
+                <button class="card__delete" type="button" v-on:click="$emit('remove-todo', todo.id)">delete</button>
+            </div>
+        </div>
+    </form>
+</article>
+</div>
 </template>
 
 <script>
-import CardTextArea from "./CardTextArea";
-import CardSettings from "./CardSettings";
-import CardBtn from "./CardBtn";
+    import CardDetails from "./CardDetails";
+    import CardColors from "./CardColors";
 
-export default {
-    name: "CardEdit",
-    components: {
-        CardTextArea,
-        CardSettings,
-        CardBtn
-    }
-};
+    export default {
+        name: "CardEdit",
+        components: {
+            CardDetails,
+            CardColors
+        },
+        data() {
+            return {
+                message: '',
+                id: Date.now(),
+                completed: false
+            }
+
+        },
+        methods: {
+            onSubmit() {
+                if (this.message.trim()) {
+                    const newTodo = {
+                    id: Date.now(),
+                    message: this.message,
+                    completed: false
+                    };
+                    this.$emit("add-todo", newTodo);
+                    this.message = "";
+                }
+            }
+        }
+    };
 </script>
 
 <style lang="scss" scoped>
+
     .container {
         width: 960px;
         padding: 0 20px;
         margin: 0 auto;
-    }
-
-    .board__filter-list {
-        margin-bottom: 24px;
-        display: flex;
-    }
-
-    .board__filter {
-        display: inline-block;
-        margin-right: 24px;
-        outline: none;
-        text-decoration: none;
-        color: #000;
-    }
-
-    .board__filter:hover,
-    .board__filter:focus {
-        opacity: 0.7;
-    }
-
-    .board__filter--active {
-        font-weight: bold;
-    }
-
-    .board__tasks {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: flex-start;
-        min-height: 500px;
-        margin-right: -40px;
-    }
-
-    .board__no-tasks {
-        text-align: center;
-        text-transform: uppercase;
     }
 
     .card {
@@ -629,312 +630,9 @@ export default {
         margin-bottom: 0;
     }
 
-    .card--edit .card__time,
-    .card--edit .card__date {
-        font-size: 11px;
-        width: 100%;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #000000;
-    }
-
-    .card--edit .card__repeat-toggle {
+    .card__status-btns {
         display: flex;
-        font-size: 11px;
-        font-weight: 500;
-        margin-top: 0;
-        margin-bottom: 11px;
-        text-transform: uppercase;
-        padding: 0;
-        border: 0;
-        outline: none;
-        cursor: pointer;
-        border-bottom: 1px solid #000000;
-        background-color: transparent;
-    }
-
-    .card__repeat-toggle:hover {
-        opacity: 0.5;
-    }
-
-    .card__repeat-toggle,
-    .card__repeat-days-inner {
-        display: none;
-    }
-
-    .card__repeat-status {
-        padding-left: 2px;
-    }
-
-    .card__repeat-days {
-        border: 0;
-        padding: 0;
-        width: 100%;
-        margin: 0;
-    }
-
-    .card__repeat-days:disabled {
-        display: none;
-    }
-
-    .card--edit .card__repeat-days-inner {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 3px;
-    }
-
-    .card--edit .card__repeat-day {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        border: 1px solid #e3dede;
-        color: #e3dede;
-        cursor: pointer;
-    }
-
-    .card--edit .card__repeat-day:hover {
-        background-color: rgba(227, 222, 222, 0.2);
-    }
-
-    .card__repeat-day-input:checked+.card__repeat-day {
-        color: #000000;
-        border-color: #000000;
-    }
-
-    .visually-hidden {
-        position: absolute !important;
-        clip: rect(1px 1px 1px 1px);
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0 !important;
-        border: 0 !important;
-        height: 1px !important;
-        width: 1px !important;
-        overflow: hidden;
-    }
-
-    /* The rest of css */
-
-    .container {
-        width: 960px;
-        padding: 0 20px;
-        margin: 0 auto;
-    }
-
-    .visually-hidden {
-        position: absolute !important;
-        clip: rect(1px 1px 1px 1px);
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0 !important;
-        border: 0 !important;
-        height: 1px !important;
-        width: 1px !important;
-        overflow: hidden;
-    }
-
-    .main {
-        padding-top: 50px;
-        padding-bottom: 20px;
-    }
-
-    .main__control {
-        margin-bottom: 8px;
-    }
-
-    .main__search {
-        margin-bottom: 14px;
-    }
-
-    .main__filter {
-        margin-bottom: 29px;
-    }
-
-    .control {
-        position: relative;
-        display: flex;
-        align-items: baseline;
-    }
-
-    .control__btn-wrap {
-        display: flex;
-        width: 100%;
-    }
-
-    .control__title {
-        font-size: 16px;
-        line-height: 23px;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .control__label {
-        font-size: 16px;
-        display: inline-flex;
-        font-weight: normal;
-        color: inherit;
-        text-decoration: none;
-        margin-left: 54px;
-        cursor: pointer;
-    }
-
-    .control__label:hover {
-        opacity: 0.7;
-        transition: opacity 0.3s ease-out;
-    }
-
-    .control__input:checked+.control__label {
-        text-shadow: 1px 0 0 #000000;
-    }
-
-    .control__input:checked+.control__label:hover {
-        opacity: 1;
-        text-shadow: 1px 0 0 #000000;
-        cursor: inherit;
-    }
-
-    .control__label--new-task {
-        margin-right: auto;
-    }
-
-    .search__input {
-        width: 100%;
-        height: 40px;
-        max-height: 40px;
-        box-sizing: border-box;
-        border: 3px solid #000000;
-        font-size: 16px;
-        font-weight: bold;
-        color: inherit;
-        font-family: inherit;
-        outline: none;
-        transition: max-height 0.3s ease-out;
-    }
-
-    .search__input::placeholder {
-        font-weight: normal;
-        color: #e7e3e3;
-        font-size: 16px;
-    }
-
-    .filter {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .filter__label {
-        text-transform: uppercase;
-        cursor: pointer;
-        font-weight: 500;
-    }
-
-    .filter__label:hover {
-        opacity: 0.7;
-        transition: opacity 0.2s ease-out;
-    }
-
-    .filter__input:not(:disabled):checked+.filter__label {
-        text-shadow: 1px 0 0 #000000;
-    }
-
-    .filter__input:not(:disabled):checked+.filter__label:hover {
-        text-shadow: 1px 0 0 #000000;
-        opacity: 1;
-    }
-
-    .filter__input:disabled+.filter__label {
-        color: #e7e3e3;
-    }
-
-    .result {
-        position: relative;
-    }
-
-    .result__back {
-        position: absolute;
-        left: 20px;
-        top: 2px;
-        border: 0;
-        background-color: transparent;
-        text-transform: uppercase;
-        font-size: 16px;
-        padding: 0;
-        outline: 0;
-    }
-
-    .result__back:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-
-    .result__title {
-        text-align: center;
-        font-size: 16px;
-        text-transform: uppercase;
-        padding-bottom: 12px;
-        border-bottom: 2px solid #000000;
-        margin-bottom: 30px;
-    }
-
-    .result__count {
-        padding-left: 3px;
-    }
-
-    .result__cards {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .result__empty {
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    .statistic {
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
-    .statistic__line {
-        display: flex;
-        padding-bottom: 20px;
-        border-bottom: 5px solid #000000;
-    }
-
-    .statistic__period {
-        width: 230px;
-        margin-right: 80px;
-    }
-
-    .statistic__period-title {
-        margin-top: 0;
-        font-size: 18px;
-        text-transform: uppercase;
-    }
-
-    .statistic-input-wrap {
-        display: flex;
-        width: 100%;
-    }
-
-    .statistic__period-input {
-        padding: 8px 0 4px 20px;
-        margin: 0;
-        border: 1px solid #000000;
-        font-size: 14px;
-        width: 100%;
-        color: #000000;
-    }
-
-    .statistic__period-result {
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    .statistic__circle {
-        padding-top: 20px;
-        display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        margin-top: auto;
     }
 </style>

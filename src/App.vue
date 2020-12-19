@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import TaskManagerWrapper from './components/TaskManagerWrapper.vue'
+    import TaskManagerWrapper from './components/TaskManagerWrapper.vue'
 
-export default {
-    name: 'App',
-    components: {
-        TaskManagerWrapper
+    export default {
+        name: 'App',
+        components: {
+            TaskManagerWrapper
+        }
     }
-}
 </script>
 
 <style lang="scss">

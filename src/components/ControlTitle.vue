@@ -1,12 +1,19 @@
 <template>
     <section class="main__control control container">
-        <h1 class="control__title">TASKMANAGER</h1>
+        <h1 class="control__title">{{title.firstLine}}</h1>
     </section>
 </template>
 
 <script>
     export default {
-        name: 'ControlTitle'
+        name: 'ControlTitle',
+        data() {
+            return {
+                title: {
+                    firstLine: "TASKMANAGER"
+                }
+            };
+        },
     }
 </script>
 

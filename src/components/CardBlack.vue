@@ -1,5 +1,5 @@
 <template>
-    <article class="card card--black">
+    <article class="card card--black"  @removeTodo="removeTodo">
         <div class="card__form">
             <div class="card__inner">
                 <CardControl />
@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card__textarea-wrap">
-                    <p class="card__text">Example default task with default color.</p>
+                    <p class="card__text">{{ todo.message }}</p>
                 </div>
 
                 <div class="card__settings">
@@ -19,7 +19,7 @@
                         <div class="card__dates">
                             <div class="card__date-deadline">
                                 <p class="card__input-deadline-wrap">
-                                    <span class="card__date">23 September</span>
+                                    <span class="card__date">{{ todo.id }}</span>
                                 </p>
                             </div>
                         </div>
@@ -37,6 +37,18 @@
         name: 'CardBlack',
         components:{
             CardControl   
+        },
+        props: {
+            todo: {
+            type: Object,
+            required: true
+            },
+            index: Number
+        },
+        methods: {
+            removeTodo(id) {
+            this.todos = this.todos.filter(t => t.id !== id)
+            },
         }
     }
 </script>
@@ -47,7 +59,7 @@
         width: 210px;
         min-height: 210px;
         margin-bottom: 26px;
-        margin-right: 40px;
+        margin-left: 20px;
     }
 
     .card__inner {
@@ -125,6 +137,7 @@
 
     .card--black .card__color-bar-wave {
         stroke: #000000;
+        margin-right: 10px;
     }
 
     .card__text {
