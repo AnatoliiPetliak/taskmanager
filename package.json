@@ -3,9 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vue-cli-service serve",
+        "serve": "concurrently \"vue-cli-service serve\" \"npm run json-server\"",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "json-server": "json-server --watch db.json --port 3000"
     },
     "dependencies": {
         "axios": "^0.21.0",
@@ -30,5 +31,6 @@
         "node-sass": "^4.12.0",
         "sass-loader": "^8.0.2",
         "vue-template-compiler": "^2.6.11"
-    }
+    },
+    "proxy": "http://localhost:3000"
 }
