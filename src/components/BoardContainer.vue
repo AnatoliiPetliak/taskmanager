@@ -32,6 +32,7 @@
 <script >
     import CardEdit from "./CardEdit"
     import CardBlack from "./CardBlack"
+    import { mapActions, mapGetters } from "vuex";
     
     export default {
         name: 'BoardContainer',
@@ -41,63 +42,7 @@
         },
         data() {
             return {
-            defaultTodos: [
-                {                
-                message: 'Create new task, type your task and press button create!',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Set end of your task, color and data',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Check your task (completed or not)',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Delete your task if neded',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Create new task, type your task and press button create!',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Set end of your task, color and data',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Check your task (completed or not)',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Delete your task if neded',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Set end of your task, color and data',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Check your task (completed or not)',
-                id: Date.now(),
-                completed: false
-                },
-                {                
-                message: 'Delete your task if neded',
-                id: Date.now(),
-                completed: false
-                },
-                ],
+            defaultTodos: [],
             todos: [],
             currentTodo: [],
             currentPage: 1,
@@ -119,7 +64,10 @@
 
             loadMore(){
                 this.activePage++;
-            }
+            },
+            ...mapActions(["GET_TODOS_FROM_API"]),
+            
+            ...mapActions(["GET_DEFAULTTODOS_FROM_API"]),
         },
         computed: {
             displayedTodos () {
@@ -131,14 +79,29 @@
                 const currentTodo = this.todos.slice(indexOfFirstTodo, indexOfLastTodo);
                 //In case loadMore without pagination: indexOfLastTodo=this.limitTodo+8 => arr.push...
                 return  currentTodo;                               
-            }
+            },
+            
+            ...mapGetters(["DEFAULTTODOSS"]),
+            
+            ...mapGetters(["TODOS"]),
          },
-        mounted: 
-            function () {
-                if(this.todos.length <= 0){
-                    this.todos.push(...this.defaultTodos)  
-                }
+        mounted() {
+            this.GET_TODOS_FROM_API().then(response => {
+            if (response.data) {
+                console.log("Data todos arrived");
+                console.log(response.data);
+                this.todos.push(...response.data) 
             }
+            });
+            this.GET_DEFAULTTODOS_FROM_API().then(response => {
+            if (response.data) {
+                console.log("Data defaultTodos arrived");
+                console.log(response.data);
+                this.defaultTodos.push(...response.data) 
+            }
+            });
+        }
+            
     }
 </script>
 

@@ -1,0 +1,114 @@
+{
+    "todos": [{
+            "message": "Create new task, type your task and press button create!",
+            "id": "12/12/1",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/2",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/3",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/4",
+            "completed": false
+        },
+        {
+            "message": "Create new task, type your task and press button create!",
+            "id": "12/12/5",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/6",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/7",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/8",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/9",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/10",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/11",
+            "completed": false
+        }
+    ],
+    "defaultTodos": [{
+            "message": "Create new task, type your task and press button create!",
+            "id": "12/12/1",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/2",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/3",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/4",
+            "completed": false
+        },
+        {
+            "message": "Create new task, type your task and press button create!",
+            "id": "12/12/5",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/6",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/7",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/8",
+            "completed": false
+        },
+        {
+            "message": "Set end of your task, color and data",
+            "id": "12/12/9",
+            "completed": false
+        },
+        {
+            "message": "Check your task (completed or not)",
+            "id": "12/12/10",
+            "completed": false
+        },
+        {
+            "message": "Delete your task if neded",
+            "id": "12/12/11",
+            "completed": false
+        }
+    ]
+}
