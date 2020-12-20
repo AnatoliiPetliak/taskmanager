@@ -81,7 +81,7 @@
                 return  currentTodo;                               
             },
             
-            ...mapGetters(["DEFAULTTODOSS"]),
+            ...mapGetters(["DEFAULTTODOS"]),
             
             ...mapGetters(["TODOS"]),
          },

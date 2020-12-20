@@ -37,10 +37,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    MOVIES(state){
+    TODOS(state){
         return state.todos;
     },
-    MOVIESESSION(state){
+    DEFAULTTODOS(state){
         return state.defaultTodos;
     }
   }
