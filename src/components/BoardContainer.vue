@@ -59,7 +59,7 @@
             },
 
             addTodo(todo) {
-            this.todos.push(todo)
+            this.todos.unshift(todo)
             },
 
             loadMore(){
