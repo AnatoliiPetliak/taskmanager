@@ -35,7 +35,7 @@
     import { mapActions, mapGetters } from "vuex";
     
     export default {
-        name: 'BoardContainer',
+        name: "BoardContainer",
         components:{
             CardEdit,
             CardBlack
@@ -50,7 +50,7 @@
             todosPerPage: 6,
 
             loading: true,
-            filter: 'all',
+            filter: "all",
             }
         },
         methods:{
@@ -90,18 +90,17 @@
             if (response.data) {
                 console.log("Data todos arrived");
                 console.log(response.data);
-                this.todos.push(...response.data) 
+                this.todos.push(...response.data); 
             }
             });
             this.GET_DEFAULTTODOS_FROM_API().then(response => {
             if (response.data) {
                 console.log("Data defaultTodos arrived");
                 console.log(response.data);
-                this.defaultTodos.push(...response.data) 
+                this.defaultTodos.push(...response.data); 
             }
             });
-        }
-            
+        }       
     }
 </script>
 

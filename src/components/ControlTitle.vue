@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: 'ControlTitle',
+        name: "ControlTitle",
         data() {
             return {
                 title: {

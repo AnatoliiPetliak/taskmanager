@@ -67,7 +67,6 @@
 </script>
 
 <style lang="scss" scoped>
-
     .container {
         width: 960px;
         padding: 0 20px;

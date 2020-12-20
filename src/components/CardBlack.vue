@@ -34,7 +34,7 @@
     import CardControl from "./CardControl"
 
     export default {
-        name: 'CardBlack',
+        name: "CardBlack",
         components:{
             CardControl   
         },

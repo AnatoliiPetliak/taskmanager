@@ -12,7 +12,7 @@
     import BoardContainer from "./BoardContainer"
 
     export default {
-        name: 'TaskManagerWrapper',
+        name: "TaskManagerWrapper",
         components: {
             ControlTitle,
             FiterContainer,
