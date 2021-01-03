@@ -7,7 +7,7 @@
         </div>
 
         <div class="board__tasks">
-            <CardEdit  @add-todo="addTodo"/>
+            <CardEdit />
             
             <div class="card__container">
                 <CardBlack 
@@ -20,7 +20,7 @@
 
         <button 
             class="load-more" type="button" 
-            v-if="activePage <= paginate.length -1"
+            v-if="visible"
             @click="loadMore"        
         >
         load more
@@ -40,7 +40,9 @@
             CardBlack
         },
         data() {
+           
             return {
+            visible: true,
             defaultTodos: [],
             todos: [],
             currentTodo: [],
@@ -52,11 +54,10 @@
             }
         },
         methods:{
-            removeTodo(id) {
-            this.todos = this.todos.filter(t => t.id !== id)
-            },
-
             loadMore(){
+                if(this.currentTodo <= 8) {
+                this.visible=false;
+                }
                 this.todosPerPage+= 8;
             },
             ...mapActions(['GET_TODOS_FROM_API']),
