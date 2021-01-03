@@ -11,10 +11,9 @@
             
             <div class="card__container">
                 <CardBlack 
-                        v-for="(todo, index) in paginate"
-                        :key="index"
-                        :todo="todo"
-                        v-on:remove-todo="addTodo"            
+                    v-for="(todo, index) in paginate"
+                    :key="index"
+                    :todo="todo"           
                 /> 
             </div>
         </div>
@@ -30,12 +29,12 @@
 </template>
 
 <script >
-    import CardEdit from "./CardEdit"
-    import CardBlack from "./CardBlack"
-    import { mapActions, mapGetters } from "vuex";
+    import CardEdit from './CardEdit'
+    import CardBlack from './CardBlack'
+    import { mapActions, mapGetters } from 'vuex';
     
     export default {
-        name: "BoardContainer",
+        name: 'BoardContainer',
         components:{
             CardEdit,
             CardBlack
@@ -47,10 +46,9 @@
             currentTodo: [],
             currentPage: 1,
             activePage: 1,
-            todosPerPage: 6,
-
+            todosPerPage: 8,
             loading: true,
-            filter: "all",
+            filter: 'all',
             }
         },
         methods:{
@@ -58,16 +56,12 @@
             this.todos = this.todos.filter(t => t.id !== id)
             },
 
-            addTodo(todo) {
-            this.todos.unshift(todo)
-            },
-
             loadMore(){
-                this.activePage++;
+                this.todosPerPage+= 8;
             },
-            ...mapActions(["GET_TODOS_FROM_API"]),
+            ...mapActions(['GET_TODOS_FROM_API']),
             
-            ...mapActions(["GET_DEFAULTTODOS_FROM_API"]),
+            ...mapActions(['GET_DEFAULTTODOS_FROM_API']),
         },
         computed: {
             displayedTodos () {
@@ -77,7 +71,6 @@
                 const indexOfLastTodo = this.activePage * this.todosPerPage;
                 const indexOfFirstTodo = indexOfLastTodo - this.todosPerPage;
                 const currentTodo = this.todos.slice(indexOfFirstTodo, indexOfLastTodo);
-                //In case loadMore without pagination: indexOfLastTodo=this.limitTodo+8 => arr.push...
                 return  currentTodo;                               
             },
             
@@ -88,14 +81,14 @@
         mounted() {
             this.GET_TODOS_FROM_API().then(response => {
             if (response.data) {
-                console.log("Data todos arrived");
+                console.log('Data todos arrived');
                 console.log(response.data);
                 this.todos.push(...response.data); 
             }
             });
             this.GET_DEFAULTTODOS_FROM_API().then(response => {
             if (response.data) {
-                console.log("Data defaultTodos arrived");
+                console.log('Data defaultTodos arrived');
                 console.log(response.data);
                 this.defaultTodos.push(...response.data); 
             }

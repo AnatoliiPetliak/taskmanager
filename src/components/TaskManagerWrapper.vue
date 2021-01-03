@@ -7,12 +7,12 @@
 </template>
 
 <script>
-    import ControlTitle from "./ControlTitle"
-    import FiterContainer from "./FilterContainer"
-    import BoardContainer from "./BoardContainer"
+    import ControlTitle from './ControlTitle'
+    import FiterContainer from './FilterContainer'
+    import BoardContainer from './BoardContainer'
 
     export default {
-        name: "TaskManagerWrapper",
+        name: 'TaskManagerWrapper',
         components: {
             ControlTitle,
             FiterContainer,

@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        name: "CardColors"
+        name: 'CardColors'
     };
 </script>
 

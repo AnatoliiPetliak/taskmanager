@@ -1,5 +1,5 @@
 <template>
-    <article class="card card--black"  @removeTodo="removeTodo">
+    <article class="card card--black" >
         <div class="card__form">
             <div class="card__inner">
                 <CardControl />
@@ -31,10 +31,10 @@
 </template>
 
 <script>
-    import CardControl from "./CardControl"
+    import CardControl from './CardControl'
 
     export default {
-        name: "CardBlack",
+        name: 'CardBlack',
         components:{
             CardControl   
         },
@@ -44,11 +44,6 @@
             required: true
             },
             index: Number
-        },
-        methods: {
-            removeTodo(id) {
-            this.todos = this.todos.filter(t => t.id !== id)
-            },
         }
     }
 </script>
