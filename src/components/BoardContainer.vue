@@ -40,17 +40,16 @@
             CardBlack
         },
         data() {
-           
             return {
-            visible: true,
-            defaultTodos: [],
-            todos: [],
-            currentTodo: [],
-            currentPage: 1,
-            activePage: 1,
-            todosPerPage: 8,
-            loading: true,
-            filter: 'all',
+                visible: true,
+                defaultTodos: [],
+                todos: [],
+                currentTodo: [],
+                currentPage: 1,
+                activePage: 1,
+                todosPerPage: 8,
+                loading: true,
+                filter: 'all',
             }
         },
         methods:{
