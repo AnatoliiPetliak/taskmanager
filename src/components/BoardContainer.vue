@@ -7,7 +7,7 @@
         </div>
 
         <div class="board__tasks">
-            <CardEdit />
+            <CardEdit @add-todo="addTodo" />
             
             <div class="card__container">
                 <CardBlack 

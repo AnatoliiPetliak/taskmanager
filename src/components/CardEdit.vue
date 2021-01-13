@@ -1,7 +1,7 @@
 <template>
 <div class="card__cntainer">
 <article class="card card--edit card--yellow card--repeat">
-    <form class="card__form" method="get">
+    <form class="card__form" method="get" @submit.prevent="onSubmit">
         <div class="card__inner">
             <div class="card__color-bar">
                 <svg class="card__color-bar-wave" width="100%" height="10">
@@ -24,7 +24,7 @@
 
             <div class="card__status-btns">
                 <button class="card__save" type="submit">save</button>
-                <button class="card__delete" type="button" >delete</button>
+                <button class="card__delete" type="button" v-on:click="$emit('remove-todo', todo.id)">delete</button>
             </div>
         </div>
     </form>
@@ -47,6 +47,19 @@
                 message: '',
                 id: Date.now(),
                 completed: false
+            }
+        },
+        methods: {
+            onSubmit() {
+                if (this.message.trim()) {
+                    const newTodo = {
+                    id: Date.now(),
+                    message: this.message,
+                    completed: false
+                    };
+                    this.$emit("add-todo", newTodo);
+                    this.message = "";
+                }
             }
         }
     };

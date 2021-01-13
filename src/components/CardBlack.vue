@@ -1,5 +1,5 @@
 <template>
-    <article class="card card--black" >
+    <article class="card card--black" @removeTodo="removeTodo">
         <div class="card__form">
             <div class="card__inner">
                 <CardControl />
@@ -44,6 +44,11 @@
             required: true
             },
             index: Number
+        },
+        methods: {
+            removeTodo(id) {
+            this.todos = this.todos.filter(t => t.id !== id)
+            }
         }
     }
 </script>
