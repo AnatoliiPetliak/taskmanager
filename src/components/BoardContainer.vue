@@ -13,7 +13,8 @@
                 <CardBlack 
                     v-for="(todo, index) in paginate"
                     :key="index"
-                    :todo="todo"           
+                    :todo="todo"
+                    v-on:remove-todo="addTodo"           
                 /> 
             </div>
         </div>
@@ -54,6 +55,12 @@
             }
         },
         methods:{
+            removeTodo(id) {
+            this.todos = this.todos.filter(t => t.id !== id)
+            },
+            addTodo(todo) {
+            this.todos.push(todo)
+            },
             loadMore(){
                 if(this.currentTodo <= 8) {
                 this.visible=false;
