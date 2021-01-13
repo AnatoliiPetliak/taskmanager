@@ -44,9 +44,21 @@
         },
         data() {
             return {
-                message: '',
                 id: Date.now(),
-                completed: false
+                message: '',//описание задачи (обязательное поле, максимальная длина 140 символов);required
+                completionData: '',//дата завершения (необязательное поле, дата без времени);
+                repeatFlag: false,//флаг повторения (необязательное поле);
+                weekDays: { //дни недели для повторения (необязательное поле, зависит от «флаг повторения»);
+                    mon: false,
+                    tue: false,
+                    wed: false,
+                    thu: false,
+                    fri: false,
+                    sat: false,
+                    Sun: false
+                },
+                hashtag: [],// хештеги (необязательное поле, максимальное количество — 5 хештегов);
+                colour: []//цветовая категория (обязательное поле).required
             }
         },
         methods: {
@@ -55,10 +67,22 @@
                     const newTodo = {
                     id: Date.now(),
                     message: this.message,
-                    completed: false
-                    };
-                    this.$emit("add-todo", newTodo);
-                    this.message = "";
+                    completionData: '',
+                    repeatFlag: false,
+                    weekDays: {
+                        mon: false,
+                        tue: false,
+                        wed: false,
+                        thu: false,
+                        fri: false,
+                        sat: false,
+                        Sun: false
+                    },
+                    hashtag: [],
+                    colour: []
+                };
+                this.$emit("add-todo", newTodo);
+                this.message = "";
                 }
             }
         }

@@ -41,17 +41,16 @@
             CardBlack
         },
         data() {
-           
             return {
-            visible: true,
-            defaultTodos: [],
-            todos: [],
-            currentTodo: [],
-            currentPage: 1,
-            activePage: 1,
-            todosPerPage: 8,
-            loading: true,
-            filter: 'all',
+                visible: true,
+                defaultTodos: [],
+                todos: [],
+                currentTodo: [],
+                currentPage: 1,
+                activePage: 1,
+                todosPerPage: 8,
+                loading: true,
+                filter: 'all',
             }
         },
         methods:{
@@ -59,7 +58,8 @@
             this.todos = this.todos.filter(t => t.id !== id)
             },
             addTodo(todo) {
-            this.todos.push(todo)
+            this.todos.push(todo);
+            this.SET_TODO_TO_API()
             },
             loadMore(){
                 if(this.currentTodo <= 8) {
@@ -70,6 +70,8 @@
             ...mapActions(['GET_TODOS_FROM_API']),
             
             ...mapActions(['GET_DEFAULTTODOS_FROM_API']),
+
+            ...mapActions(['SET_TODO_TO_API'])
         },
         computed: {
             displayedTodos () {
@@ -89,15 +91,11 @@
         mounted() {
             this.GET_TODOS_FROM_API().then(response => {
             if (response.data) {
-                console.log('Data todos arrived');
-                console.log(response.data);
                 this.todos.push(...response.data); 
             }
             });
             this.GET_DEFAULTTODOS_FROM_API().then(response => {
             if (response.data) {
-                console.log('Data defaultTodos arrived');
-                console.log(response.data);
                 this.defaultTodos.push(...response.data); 
             }
             });
