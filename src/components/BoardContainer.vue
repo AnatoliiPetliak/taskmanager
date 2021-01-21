@@ -7,14 +7,16 @@
         </div>
 
         <div class="board__tasks">
-            <CardEdit @add-todo="addTodo" />
+            <CardEdit @add-todo="addTodo" @deleteTodo="removeTodo"/>
             
             <div class="card__container">
                 <CardBlack 
                     v-for="(todo, index) in paginate"
                     :key="index"
                     :todo="todo"
-                    v-on:remove-todo="addTodo"           
+                    @deleteTodo="getRemoveTodoId"
+                    @favouritTask="getFavourites" 
+                    @setArchiveTask="setArchiveTask"          
                 /> 
             </div>
         </div>
@@ -46,37 +48,59 @@
                 defaultTodos: [],
                 todos: [],
                 currentTodo: [],
+                favouriteTodos: [],
+                archiveTodos: [],
                 currentPage: 1,
                 activePage: 1,
                 todosPerPage: 8,
                 loading: true,
                 filter: 'all',
+                todoDelete: ''
             }
         },
+
         methods:{
-            removeTodo(id) {
-            this.todos = this.todos.filter(t => t.id !== id)
+            getRemoveTodoId(id) {
+                this.todoDelete = id;
             },
+
+            removeTodo() {
+                let id = this.todoDelete;
+                this.todos = this.todos.filter(t => t.id !== id);
+                this.$store.dispatch('DELETE_TODO_TO_API', id);
+            },
+
             addTodo(todo) {
-            this.todos.push(todo);
-            this.SET_TODO_TO_API()
+                this.todos.push(todo);
+                this.$store.dispatch('SET_TODO_TO_API', todo);
+                this.$emit("todos", this.todos.length)
             },
+
             loadMore(){
                 if(this.currentTodo <= 8) {
                 this.visible=false;
                 }
                 this.todosPerPage+= 8;
             },
-            ...mapActions(['GET_TODOS_FROM_API']),
-            
-            ...mapActions(['GET_DEFAULTTODOS_FROM_API']),
 
-            ...mapActions(['SET_TODO_TO_API'])
+            getFavourites(getFavourites){
+                this.favouriteTodos.push(getFavourites);
+            },
+
+            setArchiveTask(archiveTask){
+                this.archiveTodos.push(archiveTask);
+                this.$emit("archive", this.archiveTodos.length)
+
+            },
+
+            ...mapActions(['GET_TODOS_FROM_API', 'GET_DEFAULTTODOS_FROM_API', 'SET_TODO_TO_API'])
         },
+
         computed: {
             displayedTodos () {
             return this.paginate;
             },
+
             paginate () {
                 const indexOfLastTodo = this.activePage * this.todosPerPage;
                 const indexOfFirstTodo = indexOfLastTodo - this.todosPerPage;
@@ -88,16 +112,19 @@
             
             ...mapGetters(["TODOS"]),
          },
+
         mounted() {
             this.GET_TODOS_FROM_API().then(response => {
-            if (response.data) {
-                this.todos.push(...response.data); 
-            }
+                if (response.data) {
+                    this.todos.push(...response.data);
+                    this.$emit("todos", this.todos.length)
+                }
             });
+
             this.GET_DEFAULTTODOS_FROM_API().then(response => {
-            if (response.data) {
-                this.defaultTodos.push(...response.data); 
-            }
+                if (response.data) {
+                    this.defaultTodos.push(...response.data); 
+                }
             });
         }       
     }
@@ -108,19 +135,16 @@
         display: flex;
         flex-wrap: wrap;    
         }
-
     .container {
         width: 960px;
         padding: 0 20px;
         margin: 0 auto;
     }
-
     .board__filter-list {
         margin-bottom: 24px;
         display: flex;
         
     }
-
     .board__filter {
         display: inline-block;
         margin-right: 24px;
@@ -128,16 +152,13 @@
         text-decoration: none;
         color: #000;
     }
-
     .board__filter:hover,
     .board__filter:focus {
         opacity: 0.7;
     }
-
     .board__filter--active {
         font-weight: bold;
     }
-
     .board__tasks {
         display: flex;
         flex-direction: row;
@@ -147,12 +168,10 @@
         // min-height: 500px;
         // margin-left: -40px;
     }
-
     .board__no-tasks {
         text-align: center;
         text-transform: uppercase;
     }
-
     .load-more {
         width: 100%;
         padding: 15px 0;
@@ -166,7 +185,6 @@
         margin-top: auto;
         outline: none;
     }
-
     .load-more:hover {
         background-color: rgba(0, 0, 0, 0.1);
         opacity: 0.8;

@@ -1,8 +1,8 @@
 <template>
     <div class="main">
         <ControlTitle />
-        <FiterContainer />
-        <BoardContainer />
+        <FiterContainer :archiveTodos="archiveTodos" :todos="todos"/>
+        <BoardContainer @archive="getArchiveTodos" @todos="getTodos"/>
     </div>
 </template>
 
@@ -17,6 +17,21 @@
             ControlTitle,
             FiterContainer,
             BoardContainer
+        },
+        data(){
+            return {
+               archiveTodos: null,
+               todos: null
+            }
+        },
+        methods:{
+            getArchiveTodos(data){
+                this.archiveTodos = data;
+            },
+
+            getTodos(data){
+                this.todos = data;
+            }
         }
     }
 </script>

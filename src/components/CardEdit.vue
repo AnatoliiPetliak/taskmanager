@@ -3,7 +3,7 @@
 <article class="card card--edit card--yellow card--repeat">
     <form class="card__form" method="get" @submit.prevent="onSubmit">
         <div class="card__inner">
-            <div class="card__color-bar">
+            <div class="card__color-bar" >
                 <svg class="card__color-bar-wave" width="100%" height="10">
                     <use xlink:href="#wave" />
                 </svg>
@@ -11,20 +11,20 @@
 
             <div class="card__textarea-wrap">
                 <label>
-                    <textarea v-model="message" class="card__text" placeholder="Start typing your text here..." name="text">
+                    <textarea v-model="message" class="card__text" placeholder="Start typing your text here..." name="text" maxlength="140">
                         This is example of task edit. You can set date and chose repeating days and color.
                     </textarea>
                 </label>
             </div>
 
             <div class="card__settings">
-                <CardDetails />
-                <CardColors />
+                <CardDetails @weekDays="getWeekDays" :weekDays="weekDays"/>
+                <CardColors @changeColour="changeColour"/>
             </div>
 
             <div class="card__status-btns">
                 <button class="card__save" type="submit">save</button>
-                <button class="card__delete" type="button" v-on:click="$emit('remove-todo', todo.id)">delete</button>
+                <button class="card__delete" type="button" @click="todoDelete">delete</button>
             </div>
         </div>
     </form>
@@ -48,17 +48,9 @@
                 message: '',//описание задачи (обязательное поле, максимальная длина 140 символов);required
                 completionData: '',//дата завершения (необязательное поле, дата без времени);
                 repeatFlag: false,//флаг повторения (необязательное поле);
-                weekDays: { //дни недели для повторения (необязательное поле, зависит от «флаг повторения»);
-                    mon: false,
-                    tue: false,
-                    wed: false,
-                    thu: false,
-                    fri: false,
-                    sat: false,
-                    Sun: false
-                },
+                weekDays: [], //дни недели для повторения (необязательное поле, зависит от «флаг повторения»);
                 hashtag: [],// хештеги (необязательное поле, максимальное количество — 5 хештегов);
-                colour: []//цветовая категория (обязательное поле).required
+                colour: ''//цветовая категория (обязательное поле).required
             }
         },
         methods: {
@@ -69,21 +61,27 @@
                     message: this.message,
                     completionData: '',
                     repeatFlag: false,
-                    weekDays: {
-                        mon: false,
-                        tue: false,
-                        wed: false,
-                        thu: false,
-                        fri: false,
-                        sat: false,
-                        Sun: false
-                    },
+                    weekDays: this.weekDays,
                     hashtag: [],
-                    colour: []
+                    colour: this.colour
                 };
                 this.$emit("add-todo", newTodo);
-                this.message = "";
+                this.message = '';
+                this.colour = '';
+                this.weekDays = null
                 }
+            },
+            
+            changeColour(cardColour){
+                this.colour = cardColour;
+            },
+
+            todoDelete(){
+                this.$emit("deleteTodo")
+            },
+
+            getWeekDays(days){
+                this.weekDays = days
             }
         }
     };
@@ -657,4 +655,5 @@
         flex-direction: column;
         margin-top: auto;
     }
+
 </style>

@@ -2,7 +2,7 @@
     <section class="main__filter filter container">
         <input type="radio" id="filter__all" class="filter__input visually-hidden" name="filter" checked />
         <label for="filter__all" class="filter__label">
-            All <span class="filter__all-count">13</span>
+            All <span class="filter__all-count">{{todos}}</span>
         </label>
         <input type="radio" id="filter__overdue" class="filter__input visually-hidden" name="filter" disabled />
         <label for="filter__overdue" class="filter__label">
@@ -22,14 +22,18 @@
         </label>
         <input type="radio" id="filter__archive" class="filter__input visually-hidden" name="filter" />
         <label for="filter__archive" class="filter__label">
-            Archive <span class="filter__archive-count">115</span>
+            Archive <span class="filter__archive-count">{{archiveTodos}}</span>
         </label>
     </section>
 </template>
 
 <script>
     export default {
-        name: 'FiterContainer'
+        name: 'FiterContainer',
+        props:{
+            archiveTodos: null,
+            todos: null
+        }
     }
 </script>
 

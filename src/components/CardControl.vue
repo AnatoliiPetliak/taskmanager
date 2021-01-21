@@ -4,11 +4,11 @@
           edit
         </button>
 
-        <button type="button" class="card__btn card__btn--archive">
+        <button type="button" class="card__btn card__btn--archive" @click="archiveTasks">
             archive
         </button>
 
-        <button type="button" class="card__btn card__btn--favorites">
+        <button type="button" class="card__btn card__btn--favorites" @click="addCardToFavourites">
           favorites
         </button>
     </div>
@@ -16,7 +16,34 @@
 
 <script>
     export default {
-        name: 'CardControl'
+        name: 'CardControl',
+        props: {
+            todo: {
+            type: Object,
+            required: true
+            }
+        },
+        data(){
+            return {
+                favourites: null,
+                oldTasks: null,
+                payload: null
+            }
+        },
+        methods: {
+            addCardToFavourites(){
+                const favourite = this.todo
+                this.favourites = favourite;
+                this.$emit("favouritTask", favourite)
+            },
+
+            archiveTasks(){
+                const archiveTask = this.todo;
+                this.oldTasks = archiveTask;
+                this.$emit("getArchiveTask", archiveTask)
+
+            }
+        }
     }
 </script>
 

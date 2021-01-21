@@ -1,16 +1,16 @@
 <template>
-    <article class="card card--black" @removeTodo="removeTodo">
+    <article class="card card--black"  >
         <div class="card__form">
             <div class="card__inner">
-                <CardControl />
+                <CardControl :todo="todo" @favouritTask="getFavourites" @getArchiveTask="sendArchiveTask"/>
                 
-                <div class="card__color-bar">
+                <div v-bind:style={backgroundColor:activeColor} class="card__color-bar">
                     <svg class="card__color-bar-wave" width="100%" height="10">
                         <use xlink:href="#wave"></use>
                     </svg>
                 </div>
 
-                <div class="card__textarea-wrap">
+                <div class="card__textarea-wrap" @click="senIdToBoard">
                     <p class="card__text">{{ todo.message }}</p>
                 </div>
 
@@ -19,7 +19,10 @@
                         <div class="card__dates">
                             <div class="card__date-deadline">
                                 <p class="card__input-deadline-wrap">
-                                    <span class="card__date">{{ todo.id }}</span>
+                                    <span v-for="item in todo.weekDays" :key="item.id" >{{ item }}</span>
+                                </p>
+                                <p class="card__input-deadline-wrap">
+                                    <span class="card__date" >{{ todo.id }}</span>
                                 </p>
                             </div>
                         </div>
@@ -45,11 +48,27 @@
             },
             index: Number
         },
-        methods: {
-            removeTodo(id) {
-            this.todos = this.todos.filter(t => t.id !== id)
+        data() {
+            return {
+                todos: [],
+                activeColor: this.todo.colour
             }
-        }
+        },
+        methods: {
+            senIdToBoard(){
+                const id = this.todo.id;
+                this.$emit("deleteTodo", id);
+            },
+
+            getFavourites(getFavourites){
+                this.$emit("favouritTask", getFavourites);
+            },
+
+            sendArchiveTask(archiveTask){
+                    this.$emit("setArchiveTask", archiveTask);
+            }
+
+        },
     }
 </script>
 
@@ -130,9 +149,9 @@
         margin-bottom: 10px;
         stroke: #000000;
     }
-
+/* Shange this value to have another color */
     .card--black .card__color-bar {
-        background-color: #000000;
+        background-color: #000000; 
     }
 
     .card--black .card__color-bar-wave {
@@ -212,5 +231,9 @@
         width: 140px;
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    .red {
+        background-color: red;
     }
 </style>

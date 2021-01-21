@@ -18,20 +18,20 @@
             </button>
 
             <fieldset class="card__repeat-days">
-                <div class="card__repeat-days-inner">
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-mo-4" name="repeat" value="mo" />
+                <div class="card__repeat-days-inner" @click="setWeekDays">
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-mo-4" name="repeat" value="mo" v-model="weekDays" />
                     <label class="card__repeat-day" for="repeat-mo-4">mo</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-tu-4" name="repeat" value="tu" checked />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-tu-4" name="repeat" value="tu"  v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-tu-4">tu</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-we-4" name="repeat" value="we" />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-we-4" name="repeat" value="we" v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-we-4">we</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-th-4" name="repeat" value="th" />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-th-4" name="repeat" value="th" v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-th-4">th</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-fr-4" name="repeat" value="fr" checked />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-fr-4" name="repeat" value="fr"  v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-fr-4">fr</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" name="repeat" value="sa" id="repeat-sa-4" />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" name="repeat" value="sa" id="repeat-sa-4" v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-sa-4">sa</label>
-                    <input class="visually-hidden card__repeat-day-input" type="checkbox" id="repeat-su-4" name="repeat" value="su" checked />
+                    <input class="visually-hidden card__repeat-day-input"  type="checkbox" id="repeat-su-4" name="repeat" value="su"  v-model="weekDays"/>
                     <label class="card__repeat-day" for="repeat-su-4">su</label>
                 </div>
             </fieldset>
@@ -41,7 +41,20 @@
 
 <script>
     export default {
-        name: 'CardDetails'
+        name: 'CardDetails',
+        // props: ['weekDays'],
+        data(){
+            return {
+                weekDays: []
+            }
+        },
+        
+        methods:{
+            setWeekDays(){
+                const days = this.weekDays;
+                this.$emit("weekDays", days);
+            }
+        }
     }
 </script>
 

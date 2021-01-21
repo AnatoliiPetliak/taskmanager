@@ -1,26 +1,32 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import { SET_TODOS, SET_DEFAULT_TODOS, SET_NEW_TODO } from '../../constants';
+import { SET_TODOS, SET_DEFAULT_TODOS, SET_NEW_TODO, DELETE_TODO } from '../../constants';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		todos: [],
+		todo: [],
 		defaultTodos: [],
 		archiveTodos: []
 	},
+
 	mutations: {
 		[SET_TODOS](state, todos) {
 			state.todos = todos;
-			console.log(todos);
 		},
+
 		[SET_DEFAULT_TODOS](state, defaultTodos) {
 			state.defaultTodos = defaultTodos;
 		},
-		[SET_NEW_TODO](state, todos) {
-			state.todos.push(todos);
-			console.log(state.todos);
+
+		[SET_NEW_TODO](state, todo) {
+			state.todo = todo;
+		},
+
+		[DELETE_TODO](state, todo) {
+			state.todo = todo; //Put here all todo by the exeption of chosen one
 		}
 	},
 	actions: {
@@ -28,7 +34,7 @@ export default new Vuex.Store({
 			return axios
 				.get('http://localhost:3000/todos')
 				.then((todos) => {
-					commit('SET_TODOS', todos.data);
+					commit('SET_TODOS', todos);
 					return todos;
 				})
 				.catch((error) => {
@@ -46,12 +52,22 @@ export default new Vuex.Store({
 					console.log('error', error);
 				});
 		},
-		SET_TODO_TO_API({ commit }) {
+		SET_TODO_TO_API({ commit }, payload) {
 			return axios
-				.post('http://localhost:3000/todos')
-				.then((todos) => {
-					commit('SET_NEW_TODO', todos.data);
-					return todos;
+				.post('http://localhost:3000/todos', payload)
+				.then((response) => {
+					commit('SET_NEW_TODO', response.data);
+				})
+				.catch((error) => {
+					console.log('error', error);
+				});
+		},
+
+		DELETE_TODO_TO_API({ commit }, payload) {
+			return axios
+				.post('http://localhost:3000/todos', payload)
+				.then((response) => {
+					commit('DELETE_TODO', response.data);
 				})
 				.catch((error) => {
 					console.log('error', error);

@@ -1,83 +1,50 @@
 {
   "todos": [
     {
-      "message": "Todo 1",
-      "id": "12/12/1",
-      "completed": false
+      "id": 1610752729198,
+      "message": "лои",
+      "completionData": "",
+      "repeatFlag": false,
+      "weekDays": [],
+      "hashtag": [],
+      "colour": "green"
     },
     {
-      "message": "Todo 2",
-      "id": "12/12/2",
-      "completed": false
+      "id": 1610752741211,
+      "message": "оп",
+      "completionData": "",
+      "repeatFlag": false,
+      "weekDays": [
+        "mo",
+        "tu"
+      ],
+      "hashtag": [],
+      "colour": "pink"
     },
     {
-      "message": "Todo 3",
-      "id": "12/12/3",
-      "completed": false
+      "id": 1611230504403,
+      "message": "ро",
+      "completionData": "",
+      "repeatFlag": false,
+      "weekDays": [],
+      "hashtag": [],
+      "colour": "pink"
     },
     {
-      "message": "Todo 4",
-      "id": "12/12/4",
-      "completed": false
+      "1610752729198": "",
+      "id": 1611230504404
     },
     {
-      "message": "Todo 5",
-      "id": "12/12/5",
-      "completed": false
+      "1611230504403": "",
+      "id": 1611230504405
     },
     {
-      "message": "Todo 6",
-      "id": "12/12/6",
-      "completed": false
+      "1610752729198": "",
+      "id": 1611230504406
     },
     {
-      "message": "Todo 7",
-      "id": "12/12/7",
-      "completed": false
-    },
-    {
-      "message": "Todo 8",
-      "id": "12/12/8",
-      "completed": false
-    },
-    {
-      "message": "Todo 9",
-      "id": "12/12/9",
-      "completed": false
-    },
-    {
-      "message": "Todo 10",
-      "id": "12/12/10",
-      "completed": false
-    },
-    {
-      "message": "Todo 11",
-      "id": "12/12/11",
-      "completed": false
-    },
-    {
-      "id": "-T7-wK7"
-    },
-    {
-      "id": "XxWdm_I"
-    },
-    {
-      "id": "QdTR3ZJ"
-    },
-    {
-      "id": "qrzaMKN"
-    },
-    {
-      "id": "HTbMGmI"
-    },
-    {
-      "id": "qXOQuCy"
-    },
-    {
-      "id": "3zx7B1O"
-    },
-    {
-      "id": "EauOVFz"
+      "1611230504403": "",
+      "id": 1611230504407
     }
   ],
   "defaultTodos": [
