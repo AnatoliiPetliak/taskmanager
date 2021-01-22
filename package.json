@@ -6,7 +6,7 @@
         "serve": "concurrently \"vue-cli-service serve\" \"npm run json-server\"",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "json-server": "json-server --watch db.json --port 3000"
+        "json-server": "json-server --watch db.json --port 3030"
     },
     "dependencies": {
         "axios": "^0.21.0",
@@ -26,8 +26,10 @@
         "@vue/cli-plugin-vuex": "~4.5.0",
         "@vue/cli-service": "~4.5.0",
         "babel-eslint": "^10.1.0",
+        "concurrently": "^5.3.0",
         "eslint": "^6.7.2",
         "eslint-plugin-vue": "^6.2.2",
+        "json-server": "^0.16.3",
         "node-sass": "^4.12.0",
         "sass-loader": "^8.0.2",
         "vue-template-compiler": "^2.6.11"

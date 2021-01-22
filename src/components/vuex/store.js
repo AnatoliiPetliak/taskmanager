@@ -32,7 +32,7 @@ export default new Vuex.Store({
 	actions: {
 		GET_TODOS_FROM_API({ commit }) {
 			return axios
-				.get('http://localhost:3000/todos')
+				.get('http://localhost:3030/todos')
 				.then((todos) => {
 					commit('SET_TODOS', todos);
 					return todos;
@@ -43,7 +43,7 @@ export default new Vuex.Store({
 		},
 		GET_DEFAULTTODOS_FROM_API({ commit }) {
 			return axios
-				.get('http://localhost:3000/defaultTodos')
+				.get('http://localhost:3030/defaultTodos')
 				.then((defaultTodos) => {
 					commit('SET_DEFAULT_TODOS', defaultTodos.data);
 					return defaultTodos;
@@ -54,7 +54,7 @@ export default new Vuex.Store({
 		},
 		SET_TODO_TO_API({ commit }, payload) {
 			return axios
-				.post('http://localhost:3000/todos', payload)
+				.post('http://localhost:3030/todos', payload)
 				.then((response) => {
 					commit('SET_NEW_TODO', response.data);
 				})
@@ -65,7 +65,7 @@ export default new Vuex.Store({
 
 		DELETE_TODO_TO_API({ commit }, payload) {
 			return axios
-				.post('http://localhost:3000/todos', payload)
+				.post('http://localhost:3030/todos', payload)
 				.then((response) => {
 					commit('DELETE_TODO', response.data);
 				})
