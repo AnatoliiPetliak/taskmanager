@@ -1,35 +1,35 @@
 <template>
-<div class="card__cntainer">
-<article class="card card--edit card--yellow card--repeat">
-    <form class="card__form" method="get" @submit.prevent="onSubmit">
-        <div class="card__inner">
-            <div class="card__color-bar" >
-                <svg class="card__color-bar-wave" width="100%" height="10">
-                    <use xlink:href="#wave" />
-                </svg>
-            </div>
+    <div class="card__cntainer">
+        <article class="card card--edit card--yellow card--repeat">
+            <form class="card__form" method="get" @submit.prevent="onSubmit">
+                <div class="card__inner">
+                    <div class="card__color-bar" >
+                        <svg class="card__color-bar-wave" width="100%" height="10">
+                            <use xlink:href="#wave" />
+                        </svg>
+                    </div>
 
-            <div class="card__textarea-wrap">
-                <label>
-                    <textarea v-model="message" class="card__text" placeholder="Start typing your text here..." name="text" maxlength="140">
-                        This is example of task edit. You can set date and chose repeating days and color.
-                    </textarea>
-                </label>
-            </div>
+                    <div class="card__textarea-wrap">
+                        <label>
+                            <textarea v-model="message" class="card__text" placeholder="Start typing your text here..." name="text" maxlength="140">
+                                This is example of task edit. You can set date and chose repeating days and color.
+                            </textarea>
+                        </label>
+                    </div>
 
-            <div class="card__settings">
-                <CardDetails @weekDays="getWeekDays" :weekDays="weekDays"/>
-                <CardColors @changeColour="changeColour"/>
-            </div>
+                    <div class="card__settings">
+                        <CardDetails @weekDays="getWeekDays" :weekDays="weekDays"/>
+                        <CardColors @changeColour="changeColour"/>
+                    </div>
 
-            <div class="card__status-btns">
-                <button class="card__save" type="submit">save</button>
-                <button class="card__delete" type="button" @click="todoDelete">delete</button>
-            </div>
-        </div>
-    </form>
-</article>
-</div>
+                    <div class="card__status-btns">
+                        <button class="card__save" type="submit">save</button>
+                        <button class="card__delete" type="button" @click="todoDelete">delete</button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
 </template>
 
 <script>
@@ -57,22 +57,24 @@
             onSubmit() {
                 if (this.message.trim()) {
                     const newTodo = {
-                    id: Date.now(),
-                    message: this.message,
-                    completionData: '',
-                    repeatFlag: false,
-                    weekDays: this.weekDays,
-                    hashtag: [],
-                    colour: this.colour
-                };
-                this.$emit("add-todo", newTodo);
-                this.message = '';
-                this.colour = '';
-                this.weekDays = null
+                        id: Date.now(),
+                        message: this.message,
+                        completionData: '',
+                        repeatFlag: false,
+                        weekDays: this.weekDays,
+                        hashtag: [],
+                        colour: this.colour,
+                    };
+
+                    this.$emit("add-todo", newTodo);
+
+                    this.message = '';
+                    this.colour = '';
+                    this.weekDays = null;
                 }
             },
             
-            changeColour(cardColour){
+            changeColour(cardColour) {
                 this.colour = cardColour;
             },
 

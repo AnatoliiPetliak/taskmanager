@@ -2,17 +2,19 @@
     <div class="card__colors-inner">
         <h3 class="card__colors-title">Color</h3>
 
-        <div class="card__colors-wrap" @click="setColor">
-            <input type="radio" id="color-black-4" class="card__color-input card__color-input--black visually-hidden" name="color" value="black" v-model="picked"/>
-            <label for="color-black-4" class="card__color card__color--black">black</label>
-            <input type="radio" id="color-yellow-4" class="card__color-input card__color-input--yellow visually-hidden" name="color" value="yellow" v-model="picked" />
-            <label for="color-yellow-4" class="card__color card__color--yellow" >yellow</label>
-            <input type="radio" id="color-blue-4" class="card__color-input card__color-input--blue visually-hidden" name="color" value="blue" v-model="picked"/>
-            <label for="color-blue-4" class="card__color card__color--blue">blue</label>
-            <input type="radio" id="color-green-4" class="card__color-input card__color-input--green visually-hidden" name="color" value="green" v-model="picked"/>
-            <label for="color-green-4" class="card__color card__color--green">green</label>
-            <input type="radio" id="color-pink-4" class="card__color-input card__color-input--pink visually-hidden" name="color" value="pink" v-model="picked"/>
-            <label for="color-pink-4" class="card__color card__color--pink">pink</label><br/>
+        <div class="card__colors-wrap">
+            <button
+                v-for="colour in colours"
+                :key="colour"
+                :class="{
+                    'color-control': true,
+                    ['is-' + colour]: true, 
+                    'is-checked': pickedColour === colour,
+                }"
+                @click="onColorClick(colour)"
+            >
+                {{colour}}
+            </button>
         </div>
     </div>
 </template>
@@ -20,17 +22,22 @@
 <script>
     export default {
         name: 'CardColors',
-         data() {
+        data() {
+            const colours = ['black', 'yellow', 'blue', 'green', 'pink'];
+
             return {
-                picked: ''
-            }
+                pickedColour: colours[0],
+                colours,
+            };
         },
-        methods:{
-            setColor(){
-               
-                this.$emit("changeColour", this.picked);
-                // this.picked = '';
-            }
+        methods: {
+            onColorClick(colour) {
+                if (this.colour !== colour) {
+                    this.$emit("changeColour", colour);
+
+                    this.pickedColour = colour;
+                }
+            },
         }
     };
 </script>
@@ -60,40 +67,52 @@
         margin-bottom: 20px;
     }
 
-    .card__color-input--black:checked+.card__color--black {
-        box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #0a0a0a;
-    }
+    .color-control {
+        border: 0;
+        font-size: 0;
+        height: 15px;
+        outline: 0;
+        width: 15px;
 
-    .card__color--yellow {
-        background-color: #ffe125;
-    }
+        &.is-black {
+            background-color: #0a0a0a;
 
-    .card__color-input--yellow:checked+.card__color--yellow {
-        box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #ffe125;
-    }
+            &.is-checked {
+                box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #0a0a0a;
+            }
+        }
 
-    .card__color--blue {
-        background-color: #0c5cdd;
-    }
+        &.is-yellow {
+            background-color: #ffe125;
 
-    .card__color-input--blue:checked+.card__color--blue {
-        box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #0c5cdd;
-    }
+            &.is-checked {
+                box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #ffe125;
+            }
+        }
 
-    .card__color--green {
-        background-color: #31b55c;
-    }
+        &.is-blue {
+            background-color: #0c5cdd;
 
-    .card__color-input--green:checked+.card__color--green {
-        box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #31b55c;
-    }
+            &.is-checked {
+                box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #0c5cdd;
+            }
+        }
 
-    .card__color--pink {
-        background-color: #ff3cb9;
-    }
+        &.is-green {
+            background-color: #31b55c;
 
-    .card__color-input--pink:checked+.card__color--pink {
-        box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #ff3cb9;
+            &.is-checked {
+                box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #31b55c;
+            }
+        }
+
+        &.is-pink {
+            background-color: #ff3cb9;
+
+            &.is-checked {
+                box-shadow: 0 0 0 4px #ffffff, 0 0 0 6px #ff3cb9;
+            }
+        }
     }
 
     .visually-hidden {
